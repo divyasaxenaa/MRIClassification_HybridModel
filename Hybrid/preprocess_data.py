@@ -14,7 +14,7 @@ def Img_filter(path, des):
             img = np.asarray(np.loadtxt(fpath))
             s = img.shape
             print(s)
-            if s[0] == s[1]:
+            if s[0] != s[1]:
                 name = name.replace(".txt", "")
                 newpath = des + "/" + name
                 np.save(newpath,img)
@@ -27,7 +27,7 @@ def Img_filter(path, des):
 
 
 # resize the images to (28,28)
-def resize_28_28(image, ideal_shape = (28, 28)):
+def resize_28_28(image, ideal_shape = (112, 112)):
     img_new2 = resize(image, ideal_shape, anti_aliasing=True)
     return img_new2
 
