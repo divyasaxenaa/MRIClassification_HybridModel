@@ -9,7 +9,6 @@ def load_data():
   y_train = np.load(
        path+"/CSE6389_project2/CSE6389_project2/input/train_label.npy",
       allow_pickle=True)
-
   x_test = np.load( path+"/CSE6389_project2/CSE6389_project2/input/test_data.npy",
                       allow_pickle=True)
   y_test = np.load( path+"/CSE6389_project2/CSE6389_project2/input/test_label.npy",
@@ -18,7 +17,20 @@ def load_data():
                    allow_pickle=True)
   y_val = np.load( path+"/CSE6389_project2/CSE6389_project2/input/val_label.npy",
                    allow_pickle=True)
-
+# dsx
+#   x_train = np.load(path + "/CSE6389_project2/CSE6389_project2/input_old/train_data.npy",
+#                     allow_pickle=True)
+#   y_train = np.load(
+#       path + "/CSE6389_project2/CSE6389_project2/input_old/train_label.npy",
+#       allow_pickle=True)
+#   x_test = np.load(path + "/CSE6389_project2/CSE6389_project2/input_old/test_data.npy",
+#                    allow_pickle=True)
+#   y_test = np.load(path + "/CSE6389_project2/CSE6389_project2/input_old/test_label.npy",
+#                    allow_pickle=True)
+#   x_val = np.load(path + "/CSE6389_project2/CSE6389_project2/input_old/val_data.npy",
+#                   allow_pickle=True)
+#   y_val = np.load(path + "/CSE6389_project2/CSE6389_project2/input_old/val_label.npy",
+#                   allow_pickle=True)
   return (x_train, y_train), (x_test, y_test), (x_val, y_val)
 
 
