@@ -3,7 +3,7 @@ import scipy.sparse as sp
 from sklearn.neighbors import kneighbors_graph
 import load_data_sets as load_data_sets
 
-IMG_SIZE = 28
+IMG_SIZE = 112
 
 
 def load_data(k=8, noise_level=0.0):
@@ -18,11 +18,6 @@ def load_data(k=8, noise_level=0.0):
 
 
 def _grid_coordinates(side):
-    """
-    Returns 2D coordinates for a square grid of equally spaced nodes.
-    :param side: int, the side of the grid (i.e., the grid has side * side nodes).
-    :return: np.array of shape (side * side, 2).
-    """
     M = side ** 2
     x = np.linspace(0, 1, side, dtype=np.float32)
     y = np.linspace(0, 1, side, dtype=np.float32)
@@ -34,13 +29,6 @@ def _grid_coordinates(side):
 
 
 def _get_adj_from_data(X, k, **kwargs):
-    """
-    Computes adjacency matrix of a K-NN graph from the given data.
-    :param X: rank 1 np.array, the 2D coordinates of pixels on the grid.
-    :param kwargs: kwargs for sklearn.neighbors.kneighbors_graph (see docs
-    [here](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.kneighbors_graph.html)).
-    :return: scipy sparse matrix.
-    """
     A = kneighbors_graph(X, k, **kwargs).toarray()
     A = sp.csr_matrix(np.maximum(A, A.T))
 
@@ -48,26 +36,14 @@ def _get_adj_from_data(X, k, **kwargs):
 
 
 def _img_grid_graph(k):
-    """
-    Get the adjacency matrix for the KNN graph.
-    :param k: int, number of neighbours for each node;
-    :return:
-    """
     X = _grid_coordinates(IMG_SIZE)
     A = _get_adj_from_data(
         X, k, mode='connectivity', metric='euclidean', include_self=False
     )
-
     return A
 
 
 def _flip_random_edges(A, percent):
-    """
-    Flips values of A randomly.
-    :param A: binary scipy sparse matrix.
-    :param percent: percent of the edges to flip.
-    :return: binary scipy sparse matrix.
-    """
     if not A.shape[0] == A.shape[1]:
         raise ValueError('A must be a square matrix.')
     dtype = A.dtype
