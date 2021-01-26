@@ -6,7 +6,6 @@ import numpy as np
 import os
 
 path = os.getcwd()
-print("path",path)
 
 
 def preprocessing_testing():
@@ -119,7 +118,6 @@ def preprocessing_testing():
     train_rs, val_rs, train_y_rs, val_y_rs = train_test_split(data, labels_img, stratify = labels_img, test_size = 0.16, random_state = 87)
     create_npy =  path+"/CSE6389_project2/CSE6389_project2/input/"
     np.save(create_npy + "train_data", np.asarray(train_rs))
-    print("create_npy",create_npy)
     np.save(create_npy + "train_label", np.asarray(train_y_rs))
     np.save(create_npy + "val_data", np.asarray(val_rs))
     np.save(create_npy + "val_label", np.asarray(val_y_rs))
